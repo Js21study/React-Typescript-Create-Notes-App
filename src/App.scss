@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none !important; 
+}
+
+
+.logo {
+  color: #9d94ff;
+  font-size: 30px;
+  font-family: 'Permanent Marker';
+  margin-right: 20px;
+}
+
+
+.icon-style{
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 24px;
+  color: #4e43cf;
+
+
+
+  &:hover{
+    opacity: 0.5;
+  }
+}
+
+.vh-100{
+  height: 100vh;
+}
+
