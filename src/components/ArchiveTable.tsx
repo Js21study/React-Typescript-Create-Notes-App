@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { archivesSelector, removeFromArchive } from '../redux/slices/archiveSlice';
 import Table from './TableComponent';
 import { BiArchiveOut } from 'react-icons/bi';
-import { listCategoryIcons } from './ResultsTable';
+
 import { INotesObj, addItem } from '../redux/slices/noteSlice';
+import { TableDetailsComponent } from './TableDetailsComponent';
 
 const ArchiveTable: React.FC = () => {
   const dispatch = useDispatch();
@@ -19,15 +20,10 @@ const ArchiveTable: React.FC = () => {
     <>
       <Table title="Archived" listThead={listThead}>
         {archive.map((el) => (
-          <tr key={el.id}>
-            <td className="text-center">{listCategoryIcons[el.category]}</td>
-            <td className="text-center">{el.title}</td>
-            <td className="text-center">{el.created}</td>
-            <td className="text-center">{el.categoryTitle}</td>
-            <td className="text-center">{el.content}</td>
-            <td className="text-center"> {el.dates}</td>
+          <tr key={el.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <TableDetailsComponent {...el} />
 
-            <td className="text-center">
+            <td className="text-center px-6 py-4">
               <BiArchiveOut className="icon-style" onClick={() => onRemoveFromArchive(el)} />
             </td>
           </tr>
