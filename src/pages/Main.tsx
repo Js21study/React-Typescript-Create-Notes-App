@@ -4,6 +4,7 @@ import NotesTable from '../components/NotesTable';
 import FormComponent from '../components/Form/FormComponent';
 import { useDispatch } from 'react-redux';
 import { setEditNote } from '../redux/slices/noteSlice';
+import { Button } from '../components/UI/Button';
 
 const Main: React.FC = () => {
   const dispatch = useDispatch();
@@ -19,13 +20,9 @@ const Main: React.FC = () => {
       <div>
         <NotesTable setOpenForm={setOpenForm} setEdit={setEdit} />
         <div className="flex justify-end">
-          <button
-            onClick={() => setOpenForm(!openForm)}
-            type="button"
-            className="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 my-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
-          >
+          <Button onClick={() => setOpenForm(!openForm)} type="button" variant="create">
             Create
-          </button>
+          </Button>
         </div>
         {openForm && <FormComponent closeForm={closeForm} edit={edit} setEdit={setEdit} />}
         <ResultsTable />

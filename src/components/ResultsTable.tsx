@@ -18,7 +18,7 @@ export const listCategoryTitle = ['Task', 'Random Thought', 'Idea', 'Quote'];
 const ResultsTable: React.FC = () => {
   const listThead: string[] = ['', 'Note Category', 'Active', 'Archived'];
 
-  const notes = useSelector(notesSelector);
+  const notes: INotesObj[] = useSelector(notesSelector);
   const archive = useSelector(archivesSelector);
 
   return (

@@ -5,6 +5,8 @@ import styles from './Form.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem, deleteItem, editNoteSelector, setEditNote } from '../../redux/slices/noteSlice';
 import { listCategoryTitle } from '../ResultsTable';
+import { Button } from '../UI/Button';
+import { Input } from '../UI/Input';
 
 type FormType = {
   closeForm: () => void;
@@ -96,16 +98,15 @@ const FormComponent: React.FC<FormType> = ({ closeForm, edit, setEdit }) => {
         </div>
         <div>
           <input
+            {...register('title')}
             className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-            required
             type="text"
             placeholder="To do ..."
             id="title"
-            {...register('title')}
           />
         </div>
 
-        {errors.title && <p className="text-danger">{errors.title.message}</p>}
+        {errors.title && <p className="text-red-500">{errors.title.message}</p>}
 
         <div>
           <label
@@ -144,15 +145,12 @@ const FormComponent: React.FC<FormType> = ({ closeForm, edit, setEdit }) => {
           >
             Date
           </label>
-          <input type="date" id="date" className="my-2 text-blue-500" {...register('date')} />
+          <input type="date" id="date" {...register('date')} />
         </div>
         <div className="flex justify-center items-center">
-          <button
-            className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-            type="submit"
-          >
+          <Button variant="confirm" type="submit">
             {edit ? 'Edit' : 'Confirm'}
-          </button>
+          </Button>
         </div>
       </form>
     </div>
