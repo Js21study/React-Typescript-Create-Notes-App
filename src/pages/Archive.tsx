@@ -3,7 +3,7 @@ import ArchiveTable from '../components/ArchiveTable';
 
 const Archive: React.FC = () => {
   return (
-    <div className="vh-100 p-5">
+    <div className="container vh-100 p-5">
       <ArchiveTable />
     </div>
   );

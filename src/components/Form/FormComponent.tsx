@@ -1,14 +1,12 @@
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
-import Row from 'react-bootstrap/Row';
 import styles from './Form.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem, deleteItem, editNoteSelector, setEditNote } from '../../redux/slices/noteSlice';
 import { listCategoryTitle } from '../ResultsTable';
+import { Button } from '../UI/Button';
+import { Input } from '../UI/Input';
 
 type FormType = {
   closeForm: () => void;
@@ -88,55 +86,73 @@ const FormComponent: React.FC<FormType> = ({ closeForm, edit, setEdit }) => {
 
   return (
     <div className={styles.layout} onClick={closeForm}>
-      <Form
+      <form
         onClick={(e) => e.stopPropagation()}
         className={styles.form}
         onSubmit={handleSubmit(onSubmitForm)}
       >
-        <Row className="mb-3">
-          <Form.Group as={Col}>
-            <Form.Label>Title</Form.Label>
-            <Form.Control
-              required
-              type="text"
-              placeholder="To do ..."
-              id="title"
-              {...register('title')}
-            />
-            {errors.title && <Form.Text className="text-danger">{errors.title.message}</Form.Text>}
-          </Form.Group>
-        </Row>
-        <Row className="mb-3">
-          <Form.Group as={Col}>
-            <Form.Label>Description</Form.Label>
-            <Form.Control
-              className={styles.textarea}
-              as="textarea"
-              placeholder="I want to do my task 27/07/2023 and ..."
-              id="description"
-              {...register('description')}
-            />
-            {errors.description && (
-              <Form.Text className="text-danger">{errors.description.message}</Form.Text>
-            )}
-          </Form.Group>
-        </Row>
-        <Row className="mb-3">
-          <Form.Select aria-label="Default select example" {...register('category')}>
+        <div>
+          <label className="block text-gray-500 font-bold text-center mb-1  pr-4" htmlFor="title">
+            Title
+          </label>
+        </div>
+        <div>
+          <input
+            {...register('title')}
+            className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+            type="text"
+            placeholder="To do ..."
+            id="title"
+          />
+        </div>
+
+        {errors.title && <p className="text-red-500">{errors.title.message}</p>}
+
+        <div>
+          <label
+            className="block text-gray-500 font-bold text-center mb-2 pr-4"
+            htmlFor="description"
+          >
+            Description
+          </label>
+        </div>
+        <div>
+          <textarea
+            className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full resize-none py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+            placeholder="I want to do my task 27/07/2023 and ..."
+            id="description"
+            {...register('description')}
+          />
+        </div>
+
+        {errors.description && <p className="text-danger">{errors.description.message}</p>}
+
+        <div>
+          <select
+            className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mt-2"
+            {...register('category')}
+          >
             <option value="0">Task</option>
             <option value="1">Random Thought</option>
             <option value="2">Idea</option>
             <option value="3">Quote</option>
-          </Form.Select>
-        </Row>
-        <Row className="mb-3">
-          <Form.Group as={Col}>
-            <Form.Label>Date</Form.Label>
-            <Form.Control type="date" id="date" {...register('date')} />
-          </Form.Group>
-        </Row>
-        <Button type="submit">{edit ? 'Edit' : 'Confirm'}</Button>
-      </Form>
+          </select>
+        </div>
+        <div>
+          <label
+            className="block text-gray-500 font-bold text-center mb-2 md:mb-0 pr-4"
+            htmlFor="description"
+          >
+            Date
+          </label>
+          <input type="date" id="date" {...register('date')} />
+        </div>
+        <div className="flex justify-center items-center">
+          <Button variant="confirm" type="submit">
+            {edit ? 'Edit' : 'Confirm'}
+          </Button>
+        </div>
+      </form>
     </div>
   );
 };

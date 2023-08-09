@@ -1,11 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { INotesObj, deleteItem, setEditNote, notesSelector } from '../redux/slices/noteSlice';
-
-import { BiArchiveIn, BiEditAlt, BiTrash } from 'react-icons/bi';
-import { listCategoryIcons } from './ResultsTable';
 import TableComponent from './TableComponent';
 import { addToArchive } from '../redux/slices/archiveSlice';
+import { BiArchiveIn, BiEditAlt, BiTrash } from 'react-icons/bi';
+import { TableDetailsComponent } from './TableDetailsComponent';
 
 type NotesTableType = {
   setOpenForm: React.Dispatch<React.SetStateAction<boolean>>;
@@ -33,20 +32,15 @@ const NotesTable: React.FC<NotesTableType> = ({ setOpenForm, setEdit }) => {
   return (
     <TableComponent title="Active" listThead={listThead}>
       {notes.map((el) => (
-        <tr key={el.id}>
-          <td className="text-center">{listCategoryIcons[el.category]}</td>
-          <td className="text-center">{el.title}</td>
-          <td className="text-center">{el.created}</td>
-          <td className="text-center">{el.categoryTitle}</td>
-          <td className="text-center">{el.content}</td>
-          <td className="text-center">{el.dates}</td>
-          <td className="text-center">
+        <tr key={el.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+          <TableDetailsComponent {...el} />
+          <td className="text-center px-6 py-4">
             <BiEditAlt className="icon-style" onClick={() => onEditBtn(el)} />
           </td>
-          <td className="text-center">
+          <td className="text-center px-6 py-4">
             <BiArchiveIn className="icon-style" onClick={() => onAddToArchive(el)} />
           </td>
-          <td className="text-center">
+          <td className="text-center px-6 py-4">
             <BiTrash className="icon-style" onClick={() => onDeleteNote(el.id)} />
           </td>
         </tr>

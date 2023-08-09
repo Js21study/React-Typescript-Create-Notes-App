@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-
 import ResultsTable from '../components/ResultsTable';
 import NotesTable from '../components/NotesTable';
 import FormComponent from '../components/Form/FormComponent';
 import { useDispatch } from 'react-redux';
 import { setEditNote } from '../redux/slices/noteSlice';
+import { Button } from '../components/UI/Button';
 
 const Main: React.FC = () => {
   const dispatch = useDispatch();
@@ -17,11 +16,11 @@ const Main: React.FC = () => {
   };
 
   return (
-    <div className=" p-5 container">
+    <div className="p-5 container">
       <div>
         <NotesTable setOpenForm={setOpenForm} setEdit={setEdit} />
-        <div className="d-flex justify-content-end">
-          <Button onClick={() => setOpenForm(!openForm)} variant="primary" className="my-2">
+        <div className="flex justify-end">
+          <Button onClick={() => setOpenForm(!openForm)} type="button" variant="create">
             Create
           </Button>
         </div>
